@@ -21,6 +21,7 @@ jobs:
         uses: anchore/scan-action@v3
         with:
           sbom: "${{ github.event.repository.name }}-sbom.spdx.json"
+          fail-build: false
       # To be replaced -- imagecov's action    
       - name: Hello world action step
         id: hello
