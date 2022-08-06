@@ -1,10 +1,23 @@
 on: [push]
 
 jobs:
-  hello_world_job:
+  build_and_test:
     runs-on: ubuntu-latest
     name: A job to say hello
     steps:
+      # Represent the customer building their own image
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Build Docker Image
+        run: docker build -t the_image:latest .
+      - name: Docker Image SBOM
+        uses: anchore/sbom-action@v0
+        with:
+          image: my_image:latest
+          artifact-name: the-image.spdx.json
+      - name: Print the SBOM
+        run: cat the-image.spdx.json
+      # To be replaced -- imagecov's action    
       - name: Hello world action step
         id: hello
         uses: imagecov/imagecov-action@main
