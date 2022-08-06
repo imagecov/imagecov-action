@@ -9,15 +9,18 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Build Docker Image
-        run: docker build -t the_image:latest .
+        run: docker build -t "${{ github.event.repository.name }}:latest" .
       - name: Docker Image SBOM
         uses: anchore/sbom-action@v0
         with:
-          image: the_image:latest
-          artifact-name: the-image.spdx.json
-          output-file: the-image.spdx.json
+          image: "${{ github.event.repository.name }}:latest"
+          output-file: "${{ github.event.repository.name }}-sbom.spdx.json"
       - name: Print the SBOM
-        run: cat the-image.spdx.json
+        run: cat "${{ github.event.repository.name }}-sbom.spdx.json"
+      - name: Scan SBOM
+        uses: anchore/scan-action@v3
+        with:
+          sbom: "${{ github.event.repository.name }}-sbom.spdx.json"
       # To be replaced -- imagecov's action    
       - name: Hello world action step
         id: hello
