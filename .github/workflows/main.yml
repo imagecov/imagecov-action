@@ -15,6 +15,7 @@ jobs:
         with:
           image: the_image:latest
           artifact-name: the-image.spdx.json
+          output-file: the-image.spdx.json
       - name: Print the SBOM
         run: cat the-image.spdx.json
       # To be replaced -- imagecov's action    
