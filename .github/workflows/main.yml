@@ -16,3 +16,9 @@ jobs:
         uses: imagecov/imagecov-action@sbom
         with:
           customer_image: "${{ github.event.repository.name }}:latest"
+      - name: 'Upload Artifact'
+        uses: actions/upload-artifact@v3
+        with:
+          name: findings
+          path: findings.zip
+          retention-days: 1
