@@ -1,6 +1,8 @@
 # Container image that runs your code
 FROM alpine:3.10
 
+RUN apk add libc6-compat
+
 RUN curl -sSfL https://raw.githubusercontent.com/anchore/syft/main/install.sh | sh -s -- -b /usr/local/bin
 RUN curl -sSfL https://raw.githubusercontent.com/anchore/grype/main/install.sh | sh -s -- -b /usr/local/bin
 

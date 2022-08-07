@@ -18,4 +18,4 @@ jobs:
           customer_image: "${{ github.event.repository.name }}:latest"
       # Use the output from the `imagecov` step
       - name: Print debug
-        run: echo "The time was ${{ steps.imagecov.outputs.findings }}"
+        run: echo "${{ steps.imagecov.outputs.findings }}"
