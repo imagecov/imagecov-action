@@ -11,5 +11,6 @@ outputs:
 runs:
   using: 'docker'
   image: 'Dockerfile'
+  options: --user root
   args:
     - ${{ inputs.customer_image }}
