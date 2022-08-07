@@ -13,7 +13,7 @@ jobs:
       # imagecov's action    
       - name: Run imagecov procedure
         id: imagecov
-        uses: imagecov/imagecov-action@sbom
+        uses: imagecov/imagecov-action@main
         with:
           customer_image: "${{ github.event.repository.name }}:latest"
       - name: 'Upload Artifact'
