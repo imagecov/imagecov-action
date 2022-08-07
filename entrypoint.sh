@@ -10,6 +10,8 @@ grype "docker:$1" -o json > grype.json
 echo "...Done."
 head grype.json
 
+zip findings.zip sbom.syft.json sbom.spdx.json grype.json
+
 ls -alh
 
 # Set an output?
