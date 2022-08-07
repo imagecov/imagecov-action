@@ -1,8 +1,8 @@
-FROM homebrew/brew:latest AS brew
-RUN brew tap anchore/syft \
-    && brew install syft \
-    && brew tap anchore/grype \
-    && brew install grype
+# Container image that runs your code
+FROM alpine:3.10
+
+RUN curl -sSfL https://raw.githubusercontent.com/anchore/syft/main/install.sh | sh -s -- -b /usr/local/bin
+RUN curl -sSfL https://raw.githubusercontent.com/anchore/grype/main/install.sh | sh -s -- -b /usr/local/bin
 
 # Copies your code file from your action repository to the filesystem path `/` of the container
 COPY entrypoint.sh /entrypoint.sh
