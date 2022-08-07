@@ -1,5 +1,10 @@
 #!/bin/sh -l
 
-echo "Hello $1"
-time=$(date)
-echo "::set-output name=time::$time"
+syft packages "docker:$1" -o json=sbom.syft.json -o spdx-json=sbom.spdx.json
+cat sbom.syft.json
+
+grype "docker:$1" -o json > grype.json
+cat grype.json
+
+findings=$(cat grype.json)
+echo "::set-output name=findings::$findings"
