@@ -20,5 +20,8 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: findings
-          path: findings.zip
+          path: |
+            sbom.syft.json 
+            sbom.spdx.json 
+            grype.json
           retention-days: 1
