@@ -2,13 +2,13 @@
 
 ls -alh
 echo "running syft..."
-syft packages "docker:$1" -o json=sbom.syft.json -o spdx-json=sbom.spdx.json
+sudo syft packages "docker:$1" -o json=sbom.syft.json -o spdx-json=sbom.spdx.json
 echo "...Done."
 ls -alh
 cat sbom.syft.json
 
 echo "running grype..."
-grype "docker:$1" -o json > grype.json
+sudo grype "docker:$1" -o json > grype.json
 echo "...Done."
 ls -alh
 cat grype.json
