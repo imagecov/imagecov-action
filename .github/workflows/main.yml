@@ -29,47 +29,19 @@ jobs:
     runs-on: ubuntu-latest
     name: Happy Path
     steps:
-      # Represent the customer building their own image
-      - name: Checkout
-        uses: actions/checkout@v3
-      - name: Build Docker Image
-        run: docker build -t "${{ github.event.repository.name }}:latest" .
-      # imagecov's action
+      - name: Pull Good Docker Image
+        run: docker pull hello-world
       - name: Run imagecov procedure
         id: imagecov
         uses: imagecov/imagecov-action@main
         with:
-          customer_image: "${{ github.event.repository.name }}:latest"
-      - name: 'Upload Artifact'
-        uses: actions/upload-artifact@v3
-        with:
-          name: findings
-          path: |
-            sbom.syft.json
-            sbom.spdx.json
-            grype.json
-          retention-days: 1
+          customer_image: hello-world:latest"
   sad_path:
     runs-on: ubuntu-latest
     name: Sad Path
     steps:
-      # Represent the customer building their own image
-      - name: Checkout
-        uses: actions/checkout@v3
-      - name: Build Docker Image
-        run: docker build -t "${{ github.event.repository.name }}:latest" .
-      # imagecov's action
       - name: Run imagecov procedure
         id: imagecov
         uses: imagecov/imagecov-action@main
         with:
           customer_image: "${{ github.event.repository.name }}:latest"
-      - name: 'Upload Artifact'
-        uses: actions/upload-artifact@v3
-        with:
-          name: findings
-          path: |
-            sbom.syft.json
-            sbom.spdx.json
-            grype.json
-          retention-days: 1
