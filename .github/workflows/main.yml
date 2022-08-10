@@ -1,7 +1,7 @@
 on: [push]
 
 jobs:
-  build_and_test:
+  customer_install:
     runs-on: ubuntu-latest
     name: An example customer workflow
     steps:
@@ -10,7 +10,7 @@ jobs:
         uses: actions/checkout@v3
       - name: Build Docker Image
         run: docker build -t "${{ github.event.repository.name }}:latest" .
-      # imagecov's action    
+      # imagecov's action
       - name: Run imagecov procedure
         id: imagecov
         uses: imagecov/imagecov-action@main
@@ -21,7 +21,55 @@ jobs:
         with:
           name: findings
           path: |
-            sbom.syft.json 
-            sbom.spdx.json 
+            sbom.syft.json
+            sbom.spdx.json
+            grype.json
+          retention-days: 1
+  happy_path:
+    runs-on: ubuntu-latest
+    name: An example customer workflow
+    steps:
+      # Represent the customer building their own image
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Build Docker Image
+        run: docker build -t "${{ github.event.repository.name }}:latest" .
+      # imagecov's action
+      - name: Run imagecov procedure
+        id: imagecov
+        uses: imagecov/imagecov-action@main
+        with:
+          customer_image: "${{ github.event.repository.name }}:latest"
+      - name: 'Upload Artifact'
+        uses: actions/upload-artifact@v3
+        with:
+          name: findings
+          path: |
+            sbom.syft.json
+            sbom.spdx.json
+            grype.json
+          retention-days: 1
+  sad_path:
+    runs-on: ubuntu-latest
+    name: An example customer workflow
+    steps:
+      # Represent the customer building their own image
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Build Docker Image
+        run: docker build -t "${{ github.event.repository.name }}:latest" .
+      # imagecov's action
+      - name: Run imagecov procedure
+        id: imagecov
+        uses: imagecov/imagecov-action@main
+        with:
+          customer_image: "${{ github.event.repository.name }}:latest"
+      - name: 'Upload Artifact'
+        uses: actions/upload-artifact@v3
+        with:
+          name: findings
+          path: |
+            sbom.syft.json
+            sbom.spdx.json
             grype.json
           retention-days: 1
