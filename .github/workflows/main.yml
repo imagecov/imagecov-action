@@ -3,7 +3,7 @@ on: [push]
 jobs:
   customer_install:
     runs-on: ubuntu-latest
-    name: An example customer workflow
+    name: End to end
     steps:
       # Represent the customer building their own image
       - name: Checkout
@@ -27,7 +27,7 @@ jobs:
           retention-days: 1
   happy_path:
     runs-on: ubuntu-latest
-    name: An example customer workflow
+    name: Happy Path
     steps:
       # Represent the customer building their own image
       - name: Checkout
@@ -51,7 +51,7 @@ jobs:
           retention-days: 1
   sad_path:
     runs-on: ubuntu-latest
-    name: An example customer workflow
+    name: Sad Path
     steps:
       # Represent the customer building their own image
       - name: Checkout
