@@ -40,8 +40,10 @@ jobs:
     runs-on: ubuntu-latest
     name: Sad Path
     steps:
+      - name: Pull Bad Docker Image
+        run: docker pull vulnerables/web-dvwa
       - name: Run imagecov procedure
         id: imagecov
         uses: imagecov/imagecov-action@main
         with:
-          customer_image: "${{ github.event.repository.name }}:latest"
+          customer_image: vulnerables/web-dvwa:latest
