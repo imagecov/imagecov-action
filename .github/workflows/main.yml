@@ -35,7 +35,7 @@ jobs:
         id: imagecov
         uses: imagecov/imagecov-action@main
         with:
-          customer_image: hello-world:latest"
+          customer_image: hello-world:latest
   sad_path:
     runs-on: ubuntu-latest
     name: Sad Path
