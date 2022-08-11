@@ -36,6 +36,7 @@ jobs:
         uses: imagecov/imagecov-action@happy-sad-paths
         with:
           customer_image: hello-world:latest
+          fail_on: high
   sad_path:
     runs-on: ubuntu-latest
     name: Sad Path
