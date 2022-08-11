@@ -1,16 +1,16 @@
 on: [push]
 
 jobs:
-  build_and_test:
+  customer_install:
     runs-on: ubuntu-latest
-    name: An example customer workflow
+    name: End to end
     steps:
       # Represent the customer building their own image
       - name: Checkout
         uses: actions/checkout@v3
       - name: Build Docker Image
         run: docker build -t "${{ github.event.repository.name }}:latest" .
-      # imagecov's action    
+      # imagecov's action
       - name: Run imagecov procedure
         id: imagecov
         uses: imagecov/imagecov-action@main
@@ -21,7 +21,31 @@ jobs:
         with:
           name: findings
           path: |
-            sbom.syft.json 
-            sbom.spdx.json 
+            sbom.syft.json
+            sbom.spdx.json
             grype.json
           retention-days: 1
+  happy_path:
+    runs-on: ubuntu-latest
+    name: Happy Path
+    steps:
+      - name: Pull Good Docker Image
+        run: docker pull hello-world
+      - name: Run imagecov procedure
+        id: imagecov
+        uses: imagecov/imagecov-action@main
+        with:
+          customer_image: hello-world:latest
+          fail_on: high
+  sad_path:
+    runs-on: ubuntu-latest
+    name: Sad Path
+    steps:
+      - name: Pull Bad Docker Image
+        run: docker pull vulnerables/web-dvwa
+      - name: Run imagecov procedure
+        id: imagecov
+        uses: imagecov/imagecov-action@main
+        with:
+          customer_image: vulnerables/web-dvwa:latest
+          # fail_on: low # uncomment for validation of the sad path

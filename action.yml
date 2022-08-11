@@ -2,11 +2,20 @@
 name: 'Hello World'
 description: 'Greet someone and record the time'
 inputs:
-  customer_image:  # id of input
+  customer_image:
     description: 'Docker image to scan'
     required: true
+  fail_on:
+    description: 'The severity threshold to fail the workflow'
+    required: false
+    options:
+      - low
+      - medium
+      - high
+      - critical
 runs:
   using: 'docker'
   image: 'Dockerfile'
   args:
     - ${{ inputs.customer_image }}
+    - ${{ inputs.fail_on }}
