@@ -17,4 +17,4 @@ echo "Imagecov workflow finished succesfully."
 
 [ $status -eq 0 ] && echo "Any discovered vulnerabilities were below the severity threshold." || echo "Vulnerabilities were discovered at or above the severity threshold."
 
-echo $status
+exit $status
