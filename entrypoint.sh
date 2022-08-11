@@ -6,7 +6,7 @@ echo "...Done."
 head sbom.syft.json
 
 echo "running grype..."
-grype "docker:$1" -o json --fail-on $2 > grype.json
+grype "docker:$1" -o json --fail-on "$2" > grype.json
 echo "...Done."
 head grype.json
 

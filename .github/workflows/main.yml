@@ -13,7 +13,7 @@ jobs:
       # imagecov's action
       - name: Run imagecov procedure
         id: imagecov
-        uses: imagecov/imagecov-action@main
+        uses: imagecov/imagecov-action@happy-sad-paths
         with:
           customer_image: "${{ github.event.repository.name }}:latest"
       - name: 'Upload Artifact'
@@ -33,7 +33,7 @@ jobs:
         run: docker pull hello-world
       - name: Run imagecov procedure
         id: imagecov
-        uses: imagecov/imagecov-action@main
+        uses: imagecov/imagecov-action@happy-sad-paths
         with:
           customer_image: hello-world:latest
   sad_path:
@@ -44,7 +44,7 @@ jobs:
         run: docker pull vulnerables/web-dvwa
       - name: Run imagecov procedure
         id: imagecov
-        uses: imagecov/imagecov-action@main
+        uses: imagecov/imagecov-action@happy-sad-paths
         with:
           customer_image: vulnerables/web-dvwa:latest
           fail_on: low

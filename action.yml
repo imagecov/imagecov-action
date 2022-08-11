@@ -8,13 +8,11 @@ inputs:
   fail_on:
     description: 'The severity threshold to fail the workflow'
     required: false
-    default: ''
     options:
-      - ''
-      - 'low'
-      - 'medium'
-      - 'high'
-      - 'critical'
+      - low
+      - medium
+      - high
+      - critical
 runs:
   using: 'docker'
   image: 'Dockerfile'
