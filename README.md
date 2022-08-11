@@ -17,7 +17,9 @@ This action will perform the following:
 
 ## Example usage
 
+```
 uses: imagecov/imagecov-action@main
 with:
   customer_image: vulnerables/web-dvwa:latest
   fail_on: critical
+```
