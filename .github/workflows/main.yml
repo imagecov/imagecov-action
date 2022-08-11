@@ -48,4 +48,4 @@ jobs:
         uses: imagecov/imagecov-action@happy-sad-paths
         with:
           customer_image: vulnerables/web-dvwa:latest
-          fail_on: low
+          # fail_on: low # uncomment for validation of the sad path
